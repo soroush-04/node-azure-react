@@ -67,6 +67,20 @@ export class DatabaseService {
     };
   }
 
+  updateAccount(id: number, data: { name: string; balance: number }): Account | null {
+    const account = this.getAccountById(id);
+    if (!account) return null;
+    
+    const stmt = this.db.prepare('UPDATE accounts SET name = ?, balance = ? WHERE id = ?');
+    stmt.run(data.name, data.balance, id);
+    
+    return {
+      ...account,
+      name: data.name,
+      balance: data.balance
+    };
+  }
+
   updateBalance(id: number, data: UpdateBalanceRequest): Account | null {
     const account = this.getAccountById(id);
     if (!account) return null;

@@ -29,9 +29,9 @@ export class AccountController {
         });
         return;
       }
-      
+
       const account = AccountService.getAccountById(id);
-      
+
       if (!account) {
         res.status(404).json({
           success: false,
@@ -39,7 +39,7 @@ export class AccountController {
         });
         return;
       }
-      
+
       res.json({
         success: true,
         data: account
@@ -52,11 +52,11 @@ export class AccountController {
     }
   }
 
-  // POST /accounts - Create new account
+  // POST /accounts
   static createAccount(req: Request, res: Response): void {
     try {
       const data: CreateAccountRequest = req.body;
-      
+
       if (!data.name || typeof data.initialBalance !== 'number') {
         res.status(400).json({
           success: false,
@@ -64,7 +64,7 @@ export class AccountController {
         });
         return;
       }
-      
+
       const newAccount = AccountService.createAccount(data);
       res.status(201).json({
         success: true,
@@ -79,7 +79,51 @@ export class AccountController {
     }
   }
 
-  // PUT /accounts/:id/balance - Update account balance
+  // PUT /accounts/:id/balance
+    static updateAccount(req: Request, res: Response): void {
+    try {
+      const id = parseInt(req.params['id'] || '');
+      if (isNaN(id)) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid account ID'
+        });
+        return;
+      }
+
+      const { name, balance } = req.body;
+
+      if (!name || typeof balance !== 'number') {
+        res.status(400).json({
+          success: false,
+          message: 'Name and balance are required'
+        });
+        return;
+      }
+
+      const updatedAccount = AccountService.updateAccount(id, { name, balance });
+
+      if (!updatedAccount) {
+        res.status(404).json({
+          success: false,
+          message: 'Account not found'
+        });
+        return;
+      }
+
+      res.json({
+        success: true,
+        data: updatedAccount,
+        message: 'Account updated successfully'
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: 'Failed to update account'
+      });
+    }
+  }
+
   static updateBalance(req: Request, res: Response): void {
     try {
       const id = parseInt(req.params['id'] || '');
@@ -90,9 +134,9 @@ export class AccountController {
         });
         return;
       }
-      
+
       const data: UpdateBalanceRequest = req.body;
-      
+
       if (typeof data.amount !== 'number') {
         res.status(400).json({
           success: false,
@@ -100,9 +144,9 @@ export class AccountController {
         });
         return;
       }
-      
+
       const updatedAccount = AccountService.updateBalance(id, data);
-      
+
       if (!updatedAccount) {
         res.status(404).json({
           success: false,
@@ -110,7 +154,7 @@ export class AccountController {
         });
         return;
       }
-      
+
       res.json({
         success: true,
         data: updatedAccount,
@@ -124,7 +168,7 @@ export class AccountController {
     }
   }
 
-  // DELETE /accounts/:id - Delete account
+  // DELETE /accounts/:id
   static deleteAccount(req: Request, res: Response): void {
     try {
       const id = parseInt(req.params['id'] || '');
@@ -135,9 +179,9 @@ export class AccountController {
         });
         return;
       }
-      
+
       const deleted = AccountService.deleteAccount(id);
-      
+
       if (!deleted) {
         res.status(404).json({
           success: false,
@@ -145,7 +189,7 @@ export class AccountController {
         });
         return;
       }
-      
+
       res.json({
         success: true,
         message: 'Account deleted successfully'

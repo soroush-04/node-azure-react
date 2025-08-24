@@ -3,6 +3,7 @@ import { Account, CreateAccountRequest, UpdateBalanceRequest } from '../types/ac
 
 const API_BASE_URL = 'http://localhost:3001';
 
+// api calls
 export const api = {
   getAccounts: async (): Promise<Account[]> => {
     const response = await axios.get(`${API_BASE_URL}/accounts`);
@@ -19,6 +20,12 @@ export const api = {
     return response.data.data;
   },
 
+  updateAccount: async (id: number, data: { name: string; balance: number }): Promise<Account> => {
+    const response = await axios.put(`${API_BASE_URL}/accounts/${id}`, data);
+    return response.data.data;
+  },
+
+  // update balance only
   updateBalance: async (id: number, data: UpdateBalanceRequest): Promise<Account> => {
     const response = await axios.put(`${API_BASE_URL}/accounts/${id}/balance`, data);
     return response.data.data;

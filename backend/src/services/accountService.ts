@@ -17,6 +17,10 @@ export class AccountService {
     return databaseService.createAccount(data);
   }
 
+  static updateAccount(id: number, data: { name: string; balance: number }): Account | null {
+    return databaseService.updateAccount(id, data);
+  }
+
   static updateBalance(id: number, data: UpdateBalanceRequest): Account | null {
     return databaseService.updateBalance(id, data);
   }
