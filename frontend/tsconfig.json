@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",    // Source TypeScript files location
+    "outDir": "./dist",    // Compiled JavaScript output location
+
+    // Environment Settings
+    "target": "es2020",    // Compile to ES2020 JavaScript
+    "lib": ["dom", "dom.iterable", "es6"], // Browser APIs and ES6 features
+    "allowJs": true,       // Allow JavaScript files to be compiled
+    "skipLibCheck": true,  // Skip type checking of declaration files
+
+    // Module Settings
+    "esModuleInterop": true,             // Enable ES module interop
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules without default exports
+    "strict": true,                      // Enable all strict type checking
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in file names
+
+    // React/JSX Settings
+    "jsx": "react-jsx",    // Support for React JSX
+    "module": "esnext",    // Use ES modules
+    "moduleResolution": "node", // Use Node.js-style module resolution
+
+    // Output Settings
+    "isolatedModules": true,    // Ensure files can be compiled independently
+    "noEmit": true,             // Don't emit files (handled by build tool)
+    "resolveJsonModule": true,  // Allow importing JSON files as modules
+
+    // Additional Checks
+    "noUnusedLocals": true,     // Error on unused local variables
+    "noUnusedParameters": true, // Error on unused function parameters
+    "noImplicitReturns": true,  // Functions must explicitly return
+    "noFallthroughCasesInSwitch": true, // Error on missing break in switch
+  },
+  "include": ["src/**/*"],  // Include all files in src directory
+  "exclude": ["node_modules", "dist"]  // Exclude node_modules and compiled output
+}

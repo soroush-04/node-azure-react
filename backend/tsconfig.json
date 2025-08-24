@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",    // Source TypeScript files location
+    "outDir": "./dist",    // Compiled JavaScript output location
+
+    // Environment Settings
+    "module": "commonjs",  // Use CommonJS modules (Node.js standard)
+    "target": "es2020",    // Compile to ES2020 JavaScript
+    "lib": ["es2020"],     // Use ES2020 features and APIs
+    "types": ["node"],     // Include Node.js type definitions
+
+    // Other Outputs
+    "sourceMap": true,     // Generate source maps for debugging
+    "declaration": true,   // Generate .d.ts declaration files
+    "declarationMap": true, // Generate source maps for declarations
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,    // Require explicit checks for array/object access
+    "exactOptionalPropertyTypes": true,  // Stricter optional property handling
+
+    // Style Options
+    "noImplicitReturns": true,           // Functions must explicitly return
+    "noImplicitOverride": true,          // Require explicit override keyword
+    "noUnusedLocals": true,              // Error on unused local variables
+    "noUnusedParameters": true,          // Error on unused function parameters
+    "noFallthroughCasesInSwitch": true,  // Error on missing break in switch
+    "noPropertyAccessFromIndexSignature": true, // Stricter property access
+
+    // Recommended Options
+    "strict": true,                      // Enable all strict type checking
+    "verbatimModuleSyntax": false,       // Allow ES module syntax in CommonJS
+    "isolatedModules": true,             // Ensure files can be compiled independently
+    "noUncheckedSideEffectImports": true, // Check for side effects in imports
+    "moduleDetection": "force",          // Force module detection
+    "skipLibCheck": true,                // Skip type checking of declaration files
+    "esModuleInterop": true,             // Enable ES module interop
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules without default exports
+    "resolveJsonModule": true            // Allow importing JSON files as modules
+  },
+  "include": ["src/**/*"],  // Include all files in src directory
+  "exclude": ["node_modules", "dist"]  // Exclude node_modules and compiled output
+}
