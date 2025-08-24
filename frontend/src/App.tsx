@@ -255,7 +255,7 @@ function App() {
                     <div>
                       <input
                         type="number"
-                        placeholder="Amount to add/subtract"
+                        placeholder="+/- Amount"
                         value={updateAmount}
                         onChange={(e) => setUpdateAmount(e.target.value)}
                       />
