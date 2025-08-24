@@ -1,44 +1,27 @@
 import { Account, CreateAccountRequest, UpdateBalanceRequest } from '../types/account';
+import { DatabaseService } from './databaseService';
 
-// In-memory storage for testing now
-let accounts: Account[] = [];
-let nextId = 1;
+// Create a single database instance
+const databaseService = new DatabaseService();
 
 export class AccountService {
   static getAllAccounts(): Account[] {
-    return accounts;
+    return databaseService.getAllAccounts();
   }
 
-  // Get account by ID
   static getAccountById(id: number): Account | null {
-    return accounts.find(account => account.id === id) || null;
+    return databaseService.getAccountById(id);
   }
 
   static createAccount(data: CreateAccountRequest): Account {
-    const newAccount: Account = {
-      id: nextId++,
-      name: data.name,
-      balance: data.initialBalance,
-      createdAt: new Date()
-    };
-    
-    accounts.push(newAccount);
-    return newAccount;
+    return databaseService.createAccount(data);
   }
 
   static updateBalance(id: number, data: UpdateBalanceRequest): Account | null {
-    const account = accounts.find(acc => acc.id === id);
-    if (!account) return null;
-    
-    account.balance += data.amount;
-    return account;
+    return databaseService.updateBalance(id, data);
   }
 
   static deleteAccount(id: number): boolean {
-    const index = accounts.findIndex(acc => acc.id === id);
-    if (index === -1) return false;
-    
-    accounts.splice(index, 1);
-    return true;
+    return databaseService.deleteAccount(id);
   }
 } 
