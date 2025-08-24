@@ -11,6 +11,7 @@ dotenv.config();
 console.log('Environment variables loaded:');
 console.log('PORT:', process.env['PORT']);
 console.log('KEY_VAULT_URL:', process.env['KEY_VAULT_URL']);
+// Trigger deployment
 
 const app = express();
 const PORT = process.env['PORT'] || 3001;

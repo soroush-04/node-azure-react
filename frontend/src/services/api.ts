@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Account, CreateAccountRequest, UpdateBalanceRequest } from '../types/account';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://sbt-web-app-e8cjh7awa2e6gzc8.canadacentral-01.azurewebsites.net';
 
 // api calls
 export const api = {
