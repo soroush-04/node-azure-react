@@ -50,7 +50,7 @@ function App() {
       <div>
         <h2>Accounts</h2>
         {accounts.map(account => (
-          <div key={account.id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+          <div key={account.id} className="account-item">
             <h3>{account.name}</h3>
             <p>Balance: ${account.balance}</p>
             <p>ID: {account.id}</p>
