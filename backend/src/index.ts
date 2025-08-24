@@ -2,6 +2,7 @@ import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import accountRoutes from './routes/accountRoutes';
 
 dotenv.config();
 
@@ -12,25 +13,34 @@ const PORT = process.env['PORT'] || 3001;
 app.use(cors());
 app.use(express.json());
 
-
 app.get('/', (_req: Request, res: Response) => {
   res.json({ 
-    message: 'Backend server is running!',
-    timestamp: new Date().toISOString()
+    message: 'Banking API is running!',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: 'GET /health',
+      accounts: 'GET /accounts',
+      createAccount: 'POST /accounts',
+      getAccount: 'GET /accounts/:id',
+      updateBalance: 'PUT /accounts/:id/balance',
+      deleteAccount: 'DELETE /accounts/:id'
+    }
   });
 });
 
-
+// Health check route
 app.get('/health', (_req: Request, res: Response) => {
   res.json({ 
     status: 'OK',
-    service: 'Backend API',
+    service: 'Banking API',
     version: '1.0.0'
   });
 });
 
+app.use('/accounts', accountRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Banking API is running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/health`);
+  console.log(`Account endpoints: http://localhost:${PORT}/accounts`);
 }); 
