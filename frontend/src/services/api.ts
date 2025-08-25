@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { Account, CreateAccountRequest, UpdateBalanceRequest } from '../types/account';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://sbt-web-app-e8cjh7awa2e6gzc8.canadacentral-01.azurewebsites.net';
+// Use Azure URL for production, localhost for development
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://sbt-web-app-e8cjh7awa2e6gzc8.canadacentral-01.azurewebsites.net'
+  : 'http://localhost:3001';
 
 // api calls
 export const api = {

@@ -11,13 +11,22 @@ dotenv.config();
 console.log('Environment variables loaded:');
 console.log('PORT:', process.env['PORT']);
 console.log('KEY_VAULT_URL:', process.env['KEY_VAULT_URL']);
-// Trigger deployment
+console.log('NODE_ENV:', process.env['NODE_ENV']);
+
+// Environment-specific configuration
+const isProduction = process.env['NODE_ENV'] === 'production';
+console.log(`Running in ${isProduction ? 'production' : 'development'} mode`);
 
 const app = express();
 const PORT = process.env['PORT'] || 3001;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: isProduction 
+    ? ['https://agreeable-ground-0a49b7b0f.2.azurestaticapps.net', 'https://sbt-web-app-e8cjh7awa2e6gzc8.canadacentral-01.azurewebsites.net']
+    : ['http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (_req: Request, res: Response) => {
